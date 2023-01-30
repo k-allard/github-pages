@@ -6,8 +6,8 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8090",
-      "description": "Generated server url"
+      "url": "http://localhost:8080/processing-service",
+      "description": "Processing service"
     }
   ],
   "paths": {
