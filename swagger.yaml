@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080/processing-service",
+      "url": "http://localhost:8765/processing-service",
       "description": "Processing service"
     }
   ],
@@ -34,6 +34,16 @@
               "*/*": {
                 "schema": {
                   "type": "number"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
                 }
               }
             }
@@ -78,6 +88,16 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -119,6 +139,16 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -146,6 +176,16 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/AccountEntity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
                 }
               }
             }
@@ -183,6 +223,16 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -190,6 +240,28 @@
   },
   "components": {
     "schemas": {
+      "ValidationErrorResponse": {
+        "type": "object",
+        "properties": {
+          "violations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Violation"
+            }
+          }
+        }
+      },
+      "Violation": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "TransferDto": {
         "type": "object",
         "properties": {
@@ -205,6 +277,7 @@
             "format": "int64"
           },
           "amountOfMoney": {
+            "minimum": 1,
             "type": "number"
           }
         }
@@ -216,6 +289,7 @@
             "type": "string"
           },
           "amountOfMoney": {
+            "minimum": 1,
             "type": "number"
           }
         }
